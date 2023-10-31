@@ -26,7 +26,14 @@ const insertNewReserva = async (userDB) => {
     fecha_egreso,
     importe_total,
     seña,
+    notas,
   } = userDB;
+
+  const aaa = new Date(fecha_ingreso);
+  const bbb = new Date(fecha_egreso);
+
+  const fecha1 = new Date(aaa.getTime() + 18060000);
+  const fecha2 = new Date(bbb.getTime() + 18060000);
 
   const pool = await getConnection();
   const sql = `INSERT INTO reservas (nombre,
@@ -36,16 +43,17 @@ const insertNewReserva = async (userDB) => {
     fecha_ingreso,
     fecha_egreso,
     importe_total,
-    seña) VALUES (?,?,?,?,?,?,?,?)`;
+    seña, notas) VALUES (?,?,?,?,?,?,?,?,?)`;
   const [reservas] = await pool.query(sql, [
     nombre,
     apellido,
     telefono,
     lugar,
-    fecha_ingreso,
-    fecha_egreso,
+    fecha1,
+    fecha2,
     importe_total,
     seña,
+    notas,
   ]);
 
   return reservas;
@@ -61,7 +69,14 @@ const updateReserva = async (userDB, id) => {
     fecha_egreso,
     importe_total,
     seña,
+    notas,
   } = userDB;
+
+  const aaa = new Date(fecha_ingreso);
+  const bbb = new Date(fecha_egreso);
+
+  const fecha1 = new Date(aaa.getTime() + 18060000);
+  const fecha2 = new Date(bbb.getTime() + 18060000);
 
   const pool = await getConnection();
   const sql = `UPDATE reservas SET nombre=?,
@@ -71,16 +86,17 @@ const updateReserva = async (userDB, id) => {
       fecha_ingreso=?,
       fecha_egreso=?,
       importe_total=?,
-      seña=? WHERE id = ?`;
+      seña=?, notas=? WHERE id = ?`;
   const [reservas] = await pool.query(sql, [
     nombre,
     apellido,
     telefono,
     lugar,
-    fecha_ingreso,
-    fecha_egreso,
+    fecha1,
+    fecha2,
     importe_total,
     seña,
+    notas,
     id,
   ]);
 

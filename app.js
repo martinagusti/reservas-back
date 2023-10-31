@@ -32,6 +32,7 @@ const schema = Joi.object().keys({
   fecha_egreso: Joi.date().required(),
   importe_total: Joi.number().integer().positive().required(),
   seña: Joi.number().allow(null),
+  notas: Joi.string().min(0).max(500),
 });
 
 /* app.post("/files", upload.single("avatar"), updateFile); */
@@ -66,7 +67,10 @@ app.post("/create", async (req, res) => {
       fecha_egreso,
       importe_total,
       seña,
+      notas,
     } = body;
+
+    console.log(notas);
 
     const userDB = {
       nombre,
@@ -77,6 +81,7 @@ app.post("/create", async (req, res) => {
       fecha_egreso,
       importe_total,
       seña,
+      notas,
     };
 
     const reservaId = await insertNewReserva(userDB);
@@ -127,6 +132,7 @@ app.patch("/update/:id", async (req, res) => {
       fecha_egreso,
       importe_total,
       seña,
+      notas,
     } = body;
 
     console.log(body);
@@ -140,6 +146,7 @@ app.patch("/update/:id", async (req, res) => {
       fecha_egreso,
       importe_total,
       seña,
+      notas,
     };
 
     const reservaId = await updateReserva(userDB, id);
