@@ -32,8 +32,8 @@ const insertNewReserva = async (userDB) => {
   const aaa = new Date(fecha_ingreso);
   const bbb = new Date(fecha_egreso);
 
-  const fecha1 = new Date(aaa.getTime() + 18060000);
-  const fecha2 = new Date(bbb.getTime() + 18060000);
+  const fecha1 = new Date(aaa.getTime());
+  const fecha2 = new Date(bbb.getTime());
 
   const pool = await getConnection();
   const sql = `INSERT INTO reservas (nombre,
@@ -75,8 +75,8 @@ const updateReserva = async (userDB, id) => {
   const aaa = new Date(fecha_ingreso);
   const bbb = new Date(fecha_egreso);
 
-  const fecha1 = new Date(aaa.getTime() + 18060000);
-  const fecha2 = new Date(bbb.getTime() + 18060000);
+  const fecha1 = new Date(aaa.getTime());
+  const fecha2 = new Date(bbb.getTime());
 
   const pool = await getConnection();
   const sql = `UPDATE reservas SET nombre=?,
